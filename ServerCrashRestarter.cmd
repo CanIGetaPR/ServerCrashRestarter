@@ -19,6 +19,8 @@ ECHO r2 - A WerFault instance was detected and EOSource was restarted.
 
 set wf=WerFault.exe
 set server=eoserv.exe
+set restartdelay=5
+
 set currtime=%time%
 set /a rcount=0
 set /a errcount=0
@@ -35,7 +37,7 @@ goto error
 :delay
 tasklist /FI "IMAGENAME eq %server%" | find /I "%server%" 2>nul >nul
 IF %ERRORLEVEL% == 1 START /min %server% && ECHO *Warning* %server% was not found in the process list and has now been restarted. %time% %date% && ECHO %server% may have crashed around this time (r1). %time% %date% >> RestartLog.txt
-ping 127.0.0.1 -n 10 >nul
+ping 127.0.0.1 -n %restartdelay% >nul
 goto loop
 
 :start
