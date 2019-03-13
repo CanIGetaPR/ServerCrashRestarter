@@ -8,7 +8,7 @@ REM Check for loop 10 seconds using ping delay
 REM Taskkill WerFault
 REM 
 title EOSource Restarter
-ECHO EoSource Server Restarter Version 0.0.1.5
+ECHO EoSource Server Restarter Version 0.0.1.5c
 ECHO
 ECHO Current time: %time% %date%
 ECHO To exit, type Control-C
@@ -27,13 +27,13 @@ goto start
 
 REM 0xA
 :loop
-tasklist /FI "IMAGENAME eq WerFault.exe" | find /I "WerFault.exe" >nul >nul
+tasklist /FI "IMAGENAME eq WerFault.exe" 2>NUL | find /I "WerFault.exe" 2>NUL
 IF %ERRORLEVEL% neq 1 TASKKILL /F /IM WerFault.exe && ECHO. && ECHO !!!!! %eo% has been unlocked !!!!! && set /a rcount=%rcount%+1 && ECHO Time of Crash: %time% %date% (r2) >> RestartLog.txt && ECHO. && ECHO Time of Crash: %time% %date% && goto start
 IF %ERRORLEVEL% == 1 goto delay
 goto error
 
 :delay
-tasklist /FI "IMAGENAME eq EOSource.exe" | find /I "EOSource.exe" >nul >nul
+tasklist /FI "IMAGENAME eq EOSource.exe" | find /I "EOSource.exe" 2>nul >nul
 IF %ERRORLEVEL% == 1 START /min EOSource.exe && ECHO *Warning* %eo% was not found in the process list and has now been restarted. %time% %date% && ECHO %eo% may have crashed around this time (r1). %time% %date% >> RestartLog.txt
 ping 127.0.0.1 -n 10 >nul
 goto loop
