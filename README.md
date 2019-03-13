@@ -17,5 +17,5 @@ To use this script,
 In most cases 2. won't be required if you're using this for eoserv.
 
 
-If you are still unsure which line to edit, this commit shows the line being changed from EOSOURCE.exe to eoserv.exe 
+If you are still unsure which line to edit in step 2, this commit shows the line being changed from EOSOURCE.exe to eoserv.exe, and eoserv.exe is the new server program name.
 https://github.com/CanIGetaPR/ServerCrashRestarter/commit/6c05651238751c82bdf3d7cee7be1194e695cfbb
