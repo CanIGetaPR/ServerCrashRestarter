@@ -18,7 +18,7 @@ ECHO r1 - EOSource was not found to be running.
 ECHO r2 - A WerFault instance was detected and EOSource was restarted.
 
 set wf=WerFault.exe
-set server=EOSOURCE.exe
+set server=eoserv.exe
 set currtime=%time%
 set /a rcount=0
 set /a errcount=0
