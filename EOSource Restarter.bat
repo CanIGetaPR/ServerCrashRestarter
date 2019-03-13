@@ -7,8 +7,8 @@ REM
 REM Check for loop 10 seconds using ping delay
 REM Taskkill WerFault
 REM 
-title EOSource Restarter
-ECHO EoSource Server Restarter Version 0.0.1.5c
+title Server Crash Restarter
+ECHO Server Crash Restarter Version 0.0.1.6c
 ECHO
 ECHO Current time: %time% %date%
 ECHO To exit, type Control-C
@@ -18,7 +18,7 @@ ECHO r1 - EOSource was not found to be running.
 ECHO r2 - A WerFault instance was detected and EOSource was restarted.
 
 set wf=WerFault.exe
-set eo=EOSource
+set server=EOSOURCE.exe
 set currtime=%time%
 set /a rcount=0
 set /a errcount=0
@@ -28,13 +28,13 @@ goto start
 REM 0xA
 :loop
 tasklist /FI "IMAGENAME eq WerFault.exe" 2>NUL | find /I "WerFault.exe" 2>NUL
-IF %ERRORLEVEL% neq 1 TASKKILL /F /IM WerFault.exe && ECHO. && ECHO !!!!! %eo% has been unlocked !!!!! && set /a rcount=%rcount%+1 && ECHO Time of Crash: %time% %date% (r2) >> RestartLog.txt && ECHO. && ECHO Time of Crash: %time% %date% && goto start
+IF %ERRORLEVEL% neq 1 TASKKILL /F /IM WerFault.exe && ECHO. && ECHO !!!!! %server% has been unlocked !!!!! && set /a rcount=%rcount%+1 && ECHO Time of Crash: %time% %date% (r2) >> RestartLog.txt && ECHO. && ECHO Time of Crash: %time% %date% && goto start
 IF %ERRORLEVEL% == 1 goto delay
 goto error
 
 :delay
-tasklist /FI "IMAGENAME eq EOSource.exe" | find /I "EOSource.exe" 2>nul >nul
-IF %ERRORLEVEL% == 1 START /min EOSource.exe && ECHO *Warning* %eo% was not found in the process list and has now been restarted. %time% %date% && ECHO %eo% may have crashed around this time (r1). %time% %date% >> RestartLog.txt
+tasklist /FI "IMAGENAME eq %server%" | find /I "%server%" 2>nul >nul
+IF %ERRORLEVEL% == 1 START /min %server% && ECHO *Warning* %server% was not found in the process list and has now been restarted. %time% %date% && ECHO %server% may have crashed around this time (r1). %time% %date% >> RestartLog.txt
 ping 127.0.0.1 -n 10 >nul
 goto loop
 
@@ -44,7 +44,7 @@ ECHO.
 ECHO.
 ECHO Error Count: %errcount%
 ECHO Restart Count: %rcount%
-IF EXIST eosource.exe (START /min EOSource.exe && ECHO Start Control Sent to %eo%.exe) else (ECHO. && ECHO Failed to start %eo%, target could not be found. && pause >nul && exit)
+IF EXIST %server% (START /min %server% && ECHO Start Control Sent to %server%) else (ECHO. && ECHO Failed to start %server%, target could not be found. && pause >nul && exit)
 ECHO.
 ECHO Waiting for a WerFault.exe instance.
 ECHO.
