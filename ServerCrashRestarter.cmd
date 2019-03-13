@@ -63,7 +63,7 @@ goto start
 
 REM 0xB EoF
 ECHO.
-ECHO A Fatal Has Occurred!
+ECHO A Fatal Error Has Occurred!
 ECHO Restarting Script!!!!
 ECHO Error Code 0xB >> C:\ServerRestarterFatalError.txt
 ping 2 -n 5 >nul
