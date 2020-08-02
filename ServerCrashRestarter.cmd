@@ -8,22 +8,23 @@ REM Check for loop 10 seconds using ping delay
 REM Taskkill WerFault
 REM 
 title Server Crash Restarter
+
+set wf=WerFault.exe
+set server=MyProgramName.ext
+set restartdelay=5
+
+set currtime=%time%
+set /a rcount=0
+set /a errcount=0
+
 ECHO Server Crash Restarter Version 0.0.1.6c
 ECHO
 ECHO Current time: %time% %date%
 ECHO To exit, type Control-C
 ECHO.
 ECHO Restart Codes: 
-ECHO r1 - EOSource was not found to be running.  
+ECHO r1 - %server% was not found to be running.  
 ECHO r2 - A WerFault instance was detected and EOSource was restarted.
-
-set wf=WerFault.exe
-set server=eoserv.exe
-set restartdelay=5
-
-set currtime=%time%
-set /a rcount=0
-set /a errcount=0
 
 goto start
 
