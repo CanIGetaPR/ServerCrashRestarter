@@ -12,6 +12,7 @@ title Server Crash Restarter
 set wf=WerFault.exe
 set server=MyProgramName.ext
 set restartdelay=5
+set logdirectory=%userprofile%\ServerRestarterFatalError.txt
 
 set currtime=%time%
 set /a rcount=0
@@ -68,7 +69,7 @@ REM 0xB EoF
 ECHO.
 ECHO A Fatal Error Has Occurred!
 ECHO Restarting Script!!!!
-ECHO Error Code 0xB >> C:\ServerRestarterFatalError.txt
+ECHO Error Code 0xB >> %logdirectory%
 ping 2 -n 5 >nul
 set /a errcount=%errcount%+1000
 goto start
